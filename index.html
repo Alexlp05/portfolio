@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>document.documentElement.classList.replace('no-js', 'js');</script>
+    <title>Alexandre Le Port — CV interactif</title>
+    <meta name="description"
+        content="Alexandre Le Port — étudiant ingénieur ESILV au profil hybride : IA locale, creative technology, et pilotage de projets (DeVinci Junior, AmeXio, CNJE). Un CV interactif à parcourir.">
+    <meta name="theme-color" content="#D9381E">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Alexandre Le Port — CV interactif">
+    <meta property="og:description"
+        content="Ingénierie & IA × Conseil & Management. Suivez le fil rouge : parcours, projets, compétences.">
+    <meta property="og:image" content="assets/alexandre.png">
+    <meta property="og:locale" content="fr_FR">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23121316'/%3E%3Cpath d='M10 44 C22 10 30 58 42 22 S56 30 54 18' fill='none' stroke='%23D9381E' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='54' cy='18' r='5' fill='%23F5F4F0'/%3E%3C/svg%3E">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@400..800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alexandre Le Port",
+      "jobTitle": "Étudiant ingénieur — IA & Creative Technology",
+      "alumniOf": "ESILV — École Supérieure d'Ingénieurs Léonard de Vinci",
+      "sameAs": ["https://www.linkedin.com/in/alexandreleport", "https://github.com/Alexlp05"]
+    }
+    </script>
+
+    <!-- Libraries (versions pinned) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+    <script defer src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script defer src="data.js"></script>
+    <script defer src="script.js"></script>
+</head>
+
+<body class="is-loading">
+    <a class="skip-link" href="#parcours">Aller au parcours</a>
+
+    <canvas id="three-canvas" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ============ PRELOADER ============ -->
+    <div id="preloader" class="preloader" aria-hidden="true">
+        <div class="pl-top mono"><span>( CV interactif )</span><span>Édition 2026</span></div>
+        <div class="pl-name">
+            <span class="pl-line"><span>Alexandre</span></span>
+            <span class="pl-line"><span>Le Port</span></span>
+        </div>
+        <div class="pl-thread"><span class="pl-thread-fill"></span></div>
+        <div class="pl-bottom mono"><span>Tirer le fil…</span><span id="pl-count">000</span></div>
+    </div>
+
+    <!-- ============ CURSOR ============ -->
+    <div class="cursor" aria-hidden="true">
+        <div class="cursor-ring"><span class="cursor-label"></span></div>
+        <div class="cursor-dot"></div>
+    </div>
+
+    <!-- ============ HEADER / HUD ============ -->
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <header class="site-header" id="site-header">
+        <a href="#hero" class="brand" data-cursor="Haut" aria-label="Retour en haut">
+            <span class="brand-mark">A<i></i>LP</span>
+        </a>
+        <nav class="main-nav" aria-label="Chapitres">
+            <a href="#profil" data-nav="profil"><span class="mono">01</span>Profil</a>
+            <a href="#parcours" data-nav="parcours"><span class="mono">02</span>Fil rouge</a>
+            <a href="#lab" data-nav="lab"><span class="mono">03</span>Lab</a>
+            <a href="#stack" data-nav="stack"><span class="mono">04</span>Stack</a>
+            <a href="#contact" data-nav="contact"><span class="mono">05</span>Contact</a>
+        </nav>
+        <button class="cmdk-trigger" type="button" data-cmdk data-cursor="Explorer">
+            <span>Explorer</span><kbd class="mono" id="cmdk-kbd">Ctrl K</kbd>
+        </button>
+    </header>
+
+    <div class="hud hud-left mono" aria-hidden="true">
+        <span>Paris</span> <span id="clock">--:--:--</span> <span id="clock-tz"></span>
+    </div>
+    <div class="hud hud-right mono" aria-hidden="true">
+        <span id="hud-chapter">Intro</span> — <span id="hud-progress">000</span>%
+    </div>
+
+    <!-- ============ MAIN ============ -->
+    <main id="main">
+
+        <!-- HERO -->
+        <section class="hero" id="hero" data-chapter="Intro">
+            <div class="hero-top mono">
+                <p>( Portfolio — CV interactif )</p>
+                <p class="hero-top-mid" id="hero-tagline"></p>
+                <p>Édition 2026</p>
+            </div>
+
+            <h1 class="hero-name" aria-label="Alexandre Le Port">
+                <span class="hero-line hero-line--1" data-chars aria-hidden="true">Alexandre</span>
+                <span class="hero-line hero-line--2" aria-hidden="true">
+                    <span class="hero-photo" id="hero-photo" data-cursor="Drag">
+                        <span class="hero-photo-frame"><img src="assets/alexandre.png" alt="" draggable="false"></span>
+                        <span class="hero-photo-pin"></span>
+                    </span>
+                    <span data-chars>Le Port</span>
+                </span>
+            </h1>
+
+            <p class="hero-role">
+                <span class="hero-role-pre">Je suis</span>
+                <span class="hero-role-word" id="role-word">futur ingénieur IA</span><span class="caret"></span>
+            </p>
+
+            <div class="hero-foot">
+                <div class="hero-meta" id="hero-meta"></div>
+                <a href="#profil" class="hero-scroll" data-cursor="Go">
+                    <span class="hero-scroll-line"></span>
+                    <span class="mono">Tirer le fil</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- MARQUEE -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-inner" id="marquee">
+                <span>IA locale • RAG • Computer Vision • WebGPU • Gestion de projet • Audit • Fabrication
+                    numérique • Bio-computing •&nbsp;</span>
+                <span>IA locale • RAG • Computer Vision • WebGPU • Gestion de projet • Audit • Fabrication
+                    numérique • Bio-computing •&nbsp;</span>
+            </div>
+        </div>
+
+        <!-- 01 PROFIL -->
+        <section class="section profil" id="profil" data-chapter="Profil">
+            <header class="section-head">
+                <span class="section-num mono">01</span>
+                <h2 class="section-title" data-title>En 10 secondes</h2>
+                <p class="section-kicker">Le résumé avant le détail.</p>
+            </header>
+
+            <p class="statement" id="statement"></p>
+
+            <div class="stats" id="stats"></div>
+
+            <div class="hybrid" id="hybrid">
+                <div class="hybrid-side hybrid-tech">
+                    <p class="mono hybrid-label">( Ingénieur )</p>
+                    <p class="hybrid-title">Ce que je<br>construis</p>
+                    <ul class="hybrid-words">
+                        <li>IA locale</li><li>RAG</li><li>Vision</li><li>WebGPU</li><li>Raspberry Pi</li><li>Python</li><li>TypeScript</li>
+                    </ul>
+                </div>
+                <div class="hybrid-side hybrid-conseil" aria-hidden="false">
+                    <p class="mono hybrid-label">( Conseil )</p>
+                    <p class="hybrid-title">Ce que je<br>pilote</p>
+                    <ul class="hybrid-words">
+                        <li>Projets</li><li>Équipes</li><li>Recrutement</li><li>Audit</li><li>Opérations</li><li>Stratégie</li>
+                    </ul>
+                </div>
+                <div class="hybrid-handle" id="hybrid-handle" role="slider" tabindex="0" aria-label="Équilibre ingénieur / conseil"
+                    aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" data-cursor="Drag">
+                    <span class="hybrid-knob">⇆</span>
+                </div>
+                <p class="hybrid-caption mono">Deux casquettes, un seul fil — glissez</p>
+            </div>
+        </section>
+
+        <!-- 02 PARCOURS -->
+        <section class="section parcours" id="parcours" data-chapter="Fil rouge">
+            <header class="section-head">
+                <span class="section-num mono">02</span>
+                <h2 class="section-title" data-title>Le fil rouge</h2>
+                <p class="section-kicker">Pas un CV : une trajectoire. Chaque épingle s’ouvre.</p>
+            </header>
+
+            <div class="thread-wrap" id="thread-wrap">
+                <svg class="thread-svg" id="thread-svg" aria-hidden="true">
+                    <path class="thread-track" id="thread-track" d="" />
+                    <path class="thread-path" id="thread-path" d="" />
+                    <g class="thread-needle" id="thread-needle">
+                        <circle r="14" class="needle-halo" />
+                        <circle r="5" class="needle-core" />
+                    </g>
+                </svg>
+                <ol class="chapters" id="chapters"></ol>
+            </div>
+
+            <div class="lens" id="lens" role="radiogroup" aria-label="Filtrer le parcours">
+                <span class="lens-pill" aria-hidden="true"></span>
+                <button type="button" role="radio" aria-checked="true" data-lens="all">Tout</button>
+                <button type="button" role="radio" aria-checked="false" data-lens="tech">Tech & IA</button>
+                <button type="button" role="radio" aria-checked="false" data-lens="conseil">Conseil & Mgmt</button>
+            </div>
+        </section>
+
+        <!-- 03 LAB -->
+        <section class="section lab" id="lab" data-chapter="Lab">
+            <div class="lab-pin">
+                <header class="lab-head">
+                    <div>
+                        <span class="section-num mono">03</span>
+                        <h2 class="section-title" data-title>Le Lab</h2>
+                    </div>
+                    <p class="section-kicker"><span id="lab-count">9</span> projets, du prototype hardware au papier
+                        de recherche. <span class="lab-hint mono">Scrollez →</span></p>
+                </header>
+                <div class="lab-viewport">
+                    <div class="lab-track" id="lab-track"></div>
+                </div>
+                <div class="lab-progress" aria-hidden="true"><span id="lab-progress"></span></div>
+            </div>
+        </section>
+
+        <!-- 04 STACK -->
+        <section class="section stack" id="stack" data-chapter="Stack">
+            <header class="section-head">
+                <span class="section-num mono">04</span>
+                <h2 class="section-title" data-title>Compétences ↔ preuves</h2>
+                <p class="section-kicker">Chaque compétence est reliée à l’endroit où je l’ai mise en pratique. Survolez.</p>
+            </header>
+            <div class="stack-grid" id="stack-grid">
+                <svg class="stack-svg" id="stack-svg" aria-hidden="true"></svg>
+                <div class="skills" id="skills"></div>
+                <ul class="evidence" id="evidence"></ul>
+            </div>
+        </section>
+
+        <!-- 05 CONTACT -->
+        <section class="section contact" id="contact" data-chapter="Contact">
+            <p class="mono contact-kicker"><span class="section-num">05</span> — Chapitre suivant</p>
+            <h2 class="contact-title">
+                <span class="hover-word">Le</span> <span class="hover-word">prochain</span><br>
+                <span class="hover-word">chapitre</span> <span class="hover-word accent">?</span>
+            </h2>
+            <p class="contact-sub" id="contact-sub"></p>
+            <div class="contact-actions">
+                <button type="button" class="email-btn" id="email-btn" data-magnetic data-cursor="Copier"></button>
+                <div class="contact-links">
+                    <a id="link-linkedin" target="_blank" rel="noopener" data-magnetic data-cursor="Ouvrir">LinkedIn ↗</a>
+                    <a id="link-github" target="_blank" rel="noopener" data-magnetic data-cursor="Ouvrir">GitHub ↗</a>
+                    <a id="link-cv" download data-magnetic data-cursor="PDF" hidden>CV PDF ↓</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer mono">
+        <span>© 2026 Alexandre Le Port</span>
+        <span>Codé à la main — HTML, CSS, GSAP, Three.js</span>
+        <button type="button" data-cmdk data-cursor="Explorer">Tout explorer <kbd>Ctrl K</kbd></button>
+    </footer>
+
+    <noscript>
+        <div class="noscript">
+            <h1>Alexandre Le Port</h1>
+            <p>Étudiant ingénieur ESILV — IA & Creative Technology × Conseil & Management.</p>
+            <p>Ce CV interactif nécessite JavaScript. Retrouvez mon parcours sur
+                <a href="https://www.linkedin.com/in/alexandreleport">LinkedIn</a> et mes projets sur
+                <a href="https://github.com/Alexlp05">GitHub</a>.</p>
+        </div>
+    </noscript>
+
+    <!-- ============ OVERLAYS ============ -->
+    <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
+        <div class="drawer-backdrop" data-close></div>
+        <aside class="drawer-sheet" data-lenis-prevent>
+            <button type="button" class="close-btn" data-close data-cursor="Fermer">Fermer <span>×</span></button>
+            <div class="drawer-body" id="drawer-body"></div>
+        </aside>
+    </div>
+
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+        <div class="modal-inner" data-lenis-prevent>
+            <button type="button" class="close-btn close-btn--light" data-close data-cursor="Fermer">Fermer <span>×</span></button>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Explorer le portfolio" hidden>
+        <div class="cmdk-backdrop" data-close></div>
+        <div class="cmdk-box">
+            <div class="cmdk-input-wrap">
+                <span class="mono">›</span>
+                <input id="cmdk-input" type="text" autocomplete="off" spellcheck="false"
+                    placeholder="Chercher un projet, une compétence, une action…" aria-controls="cmdk-list">
+                <kbd class="mono">Échap</kbd>
+            </div>
+            <ul class="cmdk-list" id="cmdk-list" role="listbox" data-lenis-prevent></ul>
+            <div class="cmdk-foot mono"><span>↑↓ naviguer</span><span>↵ ouvrir</span><span>Échap fermer</span></div>
+        </div>
+    </div>
+
+    <div class="audit-panel" id="audit-panel" hidden data-lenis-prevent></div>
+    <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+</body>
+
+</html>

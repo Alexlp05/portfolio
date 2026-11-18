@@ -1,0 +1,16 @@
+# Leftovers from the create-next-app template (the site is static, no build)
+tsconfig.tsbuildinfo
+postcss.config.mjs
+.python-version
+node_modules/
+.next/
+
+# Local backup and unused images (duplicate photo, stray download)
+_backup_v1/
+photo alexandre.png
+Build an automated passive income stream with AI tools .jpg
+
+# Local tooling / OS
+.claude/
+.DS_Store
+Thumbs.db
